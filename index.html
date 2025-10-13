@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Clean Water Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to the Charity Water Game Prototype</h1>
-    <script src="script.js"></script>
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <div id="cover-art">
+      <div id="game-logo">
+        <span class="drop">💧</span>
+        <span class="logo-text">Clean Water Adventure!</span>
+        <span class="drop">💧</span>
+      </div>
+      <div id="cover-animals">
+        <span class="cover-animal">🦫</span>
+        <span class="cover-animal">🐸</span>
+        <span class="cover-animal">🐦</span>
+        <span class="cover-animal">🐟</span>
+      </div>
+      <div id="cover-environments">
+        <span class="cover-env">
+          <span class="env-emoji">🌲</span>
+          <span class="env-label">Forest</span>
+        </span>
+        <span class="cover-env">
+          <span class="env-emoji">🏊‍♂️</span>
+          <span class="env-label">Surprise</span>
+        </span>
+        <span class="cover-env">
+          <span class="env-emoji">🏝️</span>
+          <span class="env-label">Ocean</span>
+        </span>
+      </div>
+    </div>
+    <p class="cover-desc">Choose an environment to start cleaning:</p>
+    <button class="env-btn" data-env="forest">Forest</button>
+    <button class="env-btn" data-env="pond">Surprise</button>
+    <button class="env-btn" data-env="ocean">Ocean</button>
+  </div>
+
+  <!-- Character Selection -->
+  <div id="character-screen" style="display:none;">
+    <h2>Choose your character</h2>
+    <div id="characters">
+      <button class="char-btn" id="beaver-btn" data-char="beaver">🦫 Beaver</button>
+      <button class="char-btn" id="frog-btn" data-char="frog">🐸 Frog</button>
+      <button class="char-btn" id="bird-btn" data-char="bird">🐦 Bird</button>
+      <button class="char-btn" id="fish-btn" data-char="fish">🐟 Fish</button>
+    </div>
+  </div>
+
+  <!-- Game Area -->
+  <div id="game-screen" style="display:none;">
+    <div id="hud">
+      <div id="timer">Time: 90</div>
+      <div id="score">Score: 0</div>
+      <div id="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+    </div>
+    <div id="game-area"></div>
+    <div id="controls">
+      <button id="left-btn">⬅️</button>
+      <button id="up-btn">⬆️</button>
+      <button id="down-btn">⬇️</button>
+      <button id="right-btn">➡️</button>
+    </div>
+  </div>
+
+  <!-- End Screen -->
+  <div id="end-screen" style="display:none;">
+    <h2 id="end-message"></h2>
+    <button id="retry-btn">Play Again</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
