@@ -277,6 +277,20 @@ retryBtn.onclick = () => {
   score = 0;
 };
 
+// Add reset button functionality
+const resetBtn = document.getElementById('reset-btn');
+if (resetBtn) {
+  resetBtn.onclick = () => {
+    // Show start screen and reset everything
+    if (timerInterval) clearInterval(timerInterval);
+    gameScreen.style.display = 'none';
+    startScreen.style.display = 'block';
+    document.body.style.background = '#e0f7fa';
+    round = 1;
+    score = 0;
+  };
+}
+
 // --- Comments for Beginners ---
 // 1. Click a location to start (Forest, Pond, or Ocean).
 // 2. Then, pick your animal character.
