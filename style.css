@@ -250,3 +250,200 @@ button.selected {
   transform: scale(1.08);
   border: 3px solid #0288d1;
 }
+
+/* === Nuevos/Modificados: Diseño más vistoso para "Choose your character" === */
+
+/* Contenedor de selección: tarjeta más colorida y moderna */
+#character-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(79,195,247,0.08), rgba(2,136,209,0.03));
+  border-radius: 20px;
+  width: 760px;
+  max-width: 96vw;
+  margin: 16px auto;
+  box-shadow: 0 10px 30px rgba(2,136,209,0.08), inset 0 -6px 18px rgba(255,255,255,0.5);
+}
+
+/* Título más llamativo */
+#character-screen h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #014a57;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Grid de personajes: tarjetas con color, borde y efecto hover */
+#characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  width: 100%;
+  align-items: stretch;
+  justify-items: center;
+  padding: 6px 12px;
+}
+
+.char-btn {
+  background: linear-gradient(180deg,#ffffff,#e6f7fb);
+  border: 2px solid rgba(2,136,209,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  width: 100%;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #02394a;
+  cursor: pointer;
+  transition: transform .14s ease, box-shadow .18s ease, border-color .12s ease;
+  box-shadow: 0 8px 18px rgba(2,136,209,0.06);
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Icono grande dentro de la tarjeta */
+.char-btn::before {
+  content: "";
+  display:block;
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(4,137,209,0.08), rgba(79,195,247,0.06));
+  display:block;
+  margin-bottom:6px;
+}
+
+/* estilos específicos para los personajes (puedes afinar colores) */
+#beaver-btn::before { background: linear-gradient(180deg,#ffd9b8,#ffb98e); }
+#frog-btn::before   { background: linear-gradient(180deg,#dff7d8,#a9e89a); }
+#bird-btn::before   { background: linear-gradient(180deg,#eaf2ff,#bfcfff); }
+#fish-btn::before   { background: linear-gradient(180deg,#dff7ff,#a2e7ff); }
+
+/* Hover y selección más marcada */
+.char-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(2,136,209,0.12);
+  border-color: rgba(2,136,209,0.22);
+}
+.char-btn.selected {
+  background: linear-gradient(180deg,#fff9db,#fff59d);
+  border-color: #0288d1;
+  color: #024b60;
+  transform: scale(1.02);
+  box-shadow: 0 18px 38px rgba(2,136,209,0.16);
+  animation: pop 340ms cubic-bezier(0.2, 1, 0.3, 1) both;
+  transform-origin: center;
+}
+
+/* Animación "pop" para selección de personaje */
+@keyframes pop {
+  0%   { transform: scale(0.96); }
+  40%  { transform: scale(1.12); }
+  70%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+/* Pequeño "pop" al pulsar (respuesta táctil inmediata) */
+.char-btn:active {
+  transform: scale(1.06);
+  transition-duration: 120ms;
+}
+
+/* Mejora de accesibilidad: respetar preferencia de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .char-btn, .char-btn.selected {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Añadir una pequeña etiqueta decorativa debajo del título */
+#character-screen .helper {
+  font-size: 0.95rem;
+  color: #04545e;
+  opacity: 0.9;
+}
+
+/* === Nuevos/Modificados: Mejor adaptación a móviles (ventana rectangular) === */
+
+@media (max-width: 720px) {
+  /* Quitar márgenes globales en móviles para usar todo el viewport */
+  body {
+    padding: 0;
+    min-height: 100vh;
+    align-items: stretch;
+  }
+
+  /* Hacer que las pantallas principales ocupen todo el ancho y parte del alto, creando una ventana rectangular */
+  #start-screen, #character-screen, #game-screen, #end-screen {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 12px;
+  }
+
+  /* Layout de game-screen vertical para repartir HUD, área y controles.
+     #game-area ocupará la mayor parte de la altura disponible. */
+  #game-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 12px;
+  }
+
+  /* Mantener el HUD en la parte superior y controles abajo. */
+  #hud {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  /* #game-area toma la mayor altura posible (ventana rectangular) */
+  #game-area {
+    width: calc(100vw - 24px);
+    margin: 0 auto;
+    flex: 1 1 auto;
+    min-height: 220px;
+    height: auto;
+    /* Si necesitas un valor fijo, se puede usar: height: calc(100vh - 150px); */
+    border-radius: 12px;
+  }
+
+  /* Controles en la parte inferior con buen espaciado */
+  #controls {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+
+  /* Hacer los botones más grandes y cómodos para toque */
+  #controls button {
+    width: 58px;
+    height: 58px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+  }
+
+  /* Ajustar el tamaño del logo y portada para móviles */
+  #game-logo { font-size: 1.6rem; margin-bottom: 8px; }
+  .cover-animal { font-size: 2.2rem; gap: 8px; }
+  .env-btn { padding: 12px 18px; font-size: 1.05rem; }
+}
